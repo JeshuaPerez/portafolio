@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portafolio</title>
+  <meta name="description" content="Portafolio personal: proyectos, entorno de desarrollo, un día en mi vida y servicios.">
+  <meta name="theme-color" content="#0b0d0c">
+
+  <script>
+    // Se ejecuta antes de pintar la página para evitar parpadeos de tema.
+    (function () {
+      var root = document.documentElement;
+      root.classList.add("js");
+      var theme = null;
+      try { theme = localStorage.getItem("theme"); } catch (e) {}
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      }
+      root.setAttribute("data-theme", theme);
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenido" data-i18n="skip"></a>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="#inicio">
+      <span class="brand-mark" aria-hidden="true">&gt;_</span>
+      <span id="brandName"></span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="#sobre" data-i18n="nav.about"></a>
+      <a href="#dia" data-i18n="nav.day"></a>
+      <a href="#entorno" data-i18n="nav.env"></a>
+      <a href="#proyectos" data-i18n="nav.projects"></a>
+      <a href="#servicios" data-i18n="nav.services"></a>
+      <a href="#contacto" data-i18n="nav.contact"></a>
+    </nav>
+
+    <div class="controls">
+      <button class="pill" id="langToggle" type="button"></button>
+      <button class="pill icon" id="themeToggle" type="button"></button>
+      <button class="menu-btn" id="menuToggle" type="button" aria-expanded="false" aria-controls="nav" data-i18n-aria="menu">☰</button>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ===================== HERO ===================== -->
+    <section class="section hero" id="inicio">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <p class="eyebrow reveal" data-i18n="hero.eyebrow"></p>
+        <h1 class="hero-title reveal" style="--d:80ms">
+          <span data-i18n="hero.greeting"></span>
+          <span class="accent" id="heroName"></span>
+        </h1>
+        <p class="hero-role reveal" style="--d:160ms">
+          <span class="prompt" aria-hidden="true">$</span>
+          <span id="typewriter"></span><span class="caret" aria-hidden="true"></span>
+        </p>
+        <p class="hero-lead reveal" style="--d:240ms" data-i18n="hero.lead"></p>
+        <div class="hero-actions reveal" style="--d:320ms">
+          <a class="btn primary" href="#proyectos" data-i18n="hero.cta1"></a>
+          <a class="btn ghost" href="#contacto" data-i18n="hero.cta2"></a>
+        </div>
+        <p class="availability reveal" style="--d:400ms">
+          <span class="dot" aria-hidden="true"></span>
+          <span data-i18n="hero.available"></span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== SOBRE MÍ ===================== -->
+    <section class="section" id="sobre">
+      <header class="section-head reveal">
+        <p class="kicker" data-i18n="about.kicker"></p>
+        <h2 data-i18n="about.title"></h2>
+      </header>
+      <div class="about-grid">
+        <figure class="about-photo reveal">
+          <img id="aboutPhoto" alt="" width="400" height="400" loading="lazy">
+        </figure>
+        <div class="about-text">
+          <div id="bio" class="reveal"></div>
+          <div class="stats" id="stats"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== STORY DAY ===================== -->
+    <section class="section" id="dia">
+      <header class="section-head reveal">
+        <p class="kicker" data-i18n="day.kicker"></p>
+        <h2 data-i18n="day.title"></h2>
+        <p class="lead" data-i18n="day.intro"></p>
+      </header>
+      <div class="day-layout">
+        <aside class="now-card reveal">
+          <p class="kicker"><span data-i18n="day.now"></span> <span id="nowLocation"></span></p>
+          <p class="now-time" id="nowTime" aria-live="off">--:--</p>
+          <div class="progress-bar" role="presentation"><span id="dayProgress"></span></div>
+          <p class="progress-label" data-i18n="day.progress"></p>
+          <p class="story-now" id="storyNow"></p>
+        </aside>
+        <ol class="timeline" id="timeline"></ol>
+      </div>
+    </section>
+
+    <!-- ===================== ENTORNO ===================== -->
+    <section class="section" id="entorno">
+      <header class="section-head reveal">
+        <p class="kicker" data-i18n="env.kicker"></p>
+        <h2 data-i18n="env.title"></h2>
+      </header>
+
+      <div class="env-grid">
+        <article class="neofetch reveal">
+          <div class="window-bar">
+            <span class="win-dot r" aria-hidden="true"></span>
+            <span class="win-dot y" aria-hidden="true"></span>
+            <span class="win-dot g" aria-hidden="true"></span>
+            <span class="win-title">~/setup</span>
+          </div>
+          <div class="nf-body" id="neofetch"></div>
+        </article>
+        <div class="tool-grid" id="toolGrid"></div>
+      </div>
+
+      <article class="terminal reveal" id="terminal">
+        <div class="window-bar">
+          <span class="win-dot r" aria-hidden="true"></span>
+          <span class="win-dot y" aria-hidden="true"></span>
+          <span class="win-dot g" aria-hidden="true"></span>
+          <span class="win-title" data-i18n="env.terminalTitle"></span>
+        </div>
+        <div class="term-output" id="termOutput" role="log" aria-live="polite"></div>
+        <form class="term-form" id="termForm" autocomplete="off">
+          <span class="term-prompt" aria-hidden="true">$</span>
+          <input id="termInput" type="text" spellcheck="false" data-i18n-placeholder="term.placeholder" aria-label="Terminal">
+        </form>
+      </article>
+    </section>
+
+    <!-- ===================== PROYECTOS ===================== -->
+    <section class="section" id="proyectos">
+      <header class="section-head reveal">
+        <p class="kicker" data-i18n="projects.kicker"></p>
+        <h2 data-i18n="projects.title"></h2>
+      </header>
+      <div class="grid" id="projectGrid"></div>
+    </section>
+
+    <!-- ===================== SERVICIOS ===================== -->
+    <section class="section" id="servicios">
+      <header class="section-head reveal">
+        <p class="kicker" data-i18n="services.kicker"></p>
+        <h2 data-i18n="services.title"></h2>
+      </header>
+      <div class="grid" id="serviceGrid"></div>
+    </section>
+
+    <!-- ===================== CONTACTO ===================== -->
+    <section class="section contact" id="contacto">
+      <div class="reveal">
+        <p class="kicker" data-i18n="contact.kicker"></p>
+        <h2 data-i18n="contact.title"></h2>
+        <p class="lead" data-i18n="contact.lead"></p>
+      </div>
+      <div class="contact-actions reveal">
+        <button class="btn primary" id="copyEmail" type="button" data-i18n="contact.copy"></button>
+        <a class="btn ghost" id="linkCv" data-i18n="contact.cv" download></a>
+      </div>
+      <ul class="social reveal">
+        <li><a id="linkGithub" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a id="linkLinkedin" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a id="linkMail"></a></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <span id="footerName"></span>
+    <span><span data-i18n="footer.rights"></span> © <span id="year"></span></span>
+    <span><span data-i18n="footer.local"></span> <span id="footerTime"></span></span>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
