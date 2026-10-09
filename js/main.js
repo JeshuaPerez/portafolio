@@ -399,9 +399,6 @@
   // ---------- Scroll, cursor y menú ----------
 
   function onScroll() {
-    var max = document.documentElement.scrollHeight - window.innerHeight;
-    var ratio = max > 0 ? window.scrollY / max : 0;
-    $("scrollProgress").style.transform = "scaleX(" + ratio + ")";
     $("siteHeader").classList.toggle("is-scrolled", window.scrollY > 10);
   }
 

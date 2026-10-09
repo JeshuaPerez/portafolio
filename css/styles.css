@@ -12,28 +12,28 @@
 }
 
 [data-theme="dark"] {
-  --bg: #0b0d0c;
-  --bg-2: #111513;
-  --card: #141916;
-  --fg: #e8efe9;
-  --muted: #94a39a;
-  --border: #222b25;
-  --accent: #3ddc97;
-  --accent-ink: #04140d;
-  --glow: rgba(61, 220, 151, 0.16);
+  --bg: #15161a;
+  --bg-2: #1c1d22;
+  --card: #202227;
+  --fg: #ececec;
+  --muted: #9a9ba3;
+  --border: #2d2f36;
+  --accent: #e63327;
+  --accent-ink: #140302;
+  --glow: rgba(230, 51, 39, 0.18);
   color-scheme: dark;
 }
 
 [data-theme="light"] {
-  --bg: #f6f7f2;
-  --bg-2: #eceee6;
+  --bg: #f1efec;
+  --bg-2: #e6e3de;
   --card: #ffffff;
-  --fg: #111813;
-  --muted: #5a6b61;
-  --border: #d7ddd3;
-  --accent: #0a7d55;
+  --fg: #1a1a1a;
+  --muted: #6b6b6b;
+  --border: #d8d5cf;
+  --accent: #c41e1e;
   --accent-ink: #ffffff;
-  --glow: rgba(10, 125, 85, 0.12);
+  --glow: rgba(196, 30, 30, 0.12);
   color-scheme: light;
 }
 
@@ -125,12 +125,23 @@ p {
 }
 
 .kicker {
+  display: inline-block;
   font-family: var(--font-mono);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--accent);
-  margin: 0 0 10px;
+  letter-spacing: 0.08em;
+  color: var(--accent-ink);
+  background: var(--accent);
+  padding: 4px 11px;
+  border-radius: 3px;
+  transform: skewX(-10deg);
+  margin: 0 0 12px;
+}
+
+.kicker > * {
+  display: inline-block;
+  transform: skewX(10deg);
 }
 
 .lead {
@@ -205,18 +216,6 @@ p {
 /* ==========================================================
    CABECERA Y CONTROLES
    ========================================================== */
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--accent);
-  transform-origin: 0 50%;
-  transform: scaleX(0);
-  z-index: 60;
-}
-
 .cursor-glow {
   display: none;
 }
