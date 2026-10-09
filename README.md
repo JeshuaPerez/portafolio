@@ -22,8 +22,8 @@ portafolio/
 ├── js/i18n.js          Textos de la interfaz en ES y EN
 ├── js/main.js          Comportamiento (tema, idioma, animaciones, terminal)
 └── assets/
-    ├── img/perfil.svg  Foto de perfil (reemplazar por tu foto)
-    └── cv.pdf          Tu CV (agregar tu archivo)
+    ├── img/*.webp      Fotos optimizadas (perfil y galería) + og-image.jpg
+    └── CV_Jeshua_Perez.pdf   Tu CV
 ```
 
 ## Cómo verlo localmente
@@ -39,7 +39,7 @@ python3 -m http.server 8000
 ## Cómo personalizarlo
 
 1. Abre `js/config.js` y reemplaza los datos de ejemplo: nombre, correo, GitHub, LinkedIn, estadísticas, rutina, herramientas, proyectos y servicios.
-2. Reemplaza `assets/img/Perfil.jpeg` por tu foto (puedes cambiar la ruta en `profile.photo`). Usa una imagen cuadrada.
+2. Reemplaza `assets/img/perfil.webp` por tu foto (puedes cambiar la ruta en `profile.photo`). Usa una imagen cuadrada.
 3. Actualiza tu CV en `assets/CV_Jeshua_Perez.pdf`.
 4. Para cambiar la paleta, edita las variables de color en `css/styles.css` (bloques `[data-theme="dark"]` y `[data-theme="light"]`).
 

@@ -19,8 +19,8 @@ window.PORTFOLIO_CONFIG = {
     github: "https://github.com/JeshuaPerez",
     linkedin: "https://www.linkedin.com/in/jeshua-perez-ods2007",
     cv: "assets/CV_Jeshua_Perez.pdf",
-    photo: "assets/img/Perfil.jpeg",
-    photoHero: "assets/img/Perfil-profesional.png"
+    photo: "assets/img/perfil.webp",
+    photoHero: "assets/img/perfil-profesional.webp"
   },
 
   bio: {
@@ -37,9 +37,9 @@ window.PORTFOLIO_CONFIG = {
   },
 
   lifestyle: [
-    { photo: "assets/img/dh.jpg", caption: { es: "Downhill", en: "Downhill" } },
-    { photo: "assets/img/enduro.jpg", caption: { es: "Enduro", en: "Enduro" } },
-    { photo: "assets/img/montana.jpg", caption: { es: "Montaña y senderismo", en: "Mountains & hiking" } }
+    { photo: "assets/img/dh.webp", caption: { es: "Downhill", en: "Downhill" } },
+    { photo: "assets/img/enduro.webp", caption: { es: "Enduro", en: "Enduro" } },
+    { photo: "assets/img/montana.webp", caption: { es: "Montaña y senderismo", en: "Mountains & hiking" } }
   ],
 
   stats: [
@@ -83,7 +83,7 @@ window.PORTFOLIO_CONFIG = {
 
   environment: {
     info: [
-      { key: "OS", value: "Linux" },
+      { key: "OS", value: "Windows + Linux" },
       { key: "Editor", value: "VS Code" },
       { key: "Versionado", value: "Git + GitHub" },
       { key: "Contenedores", value: "Docker" },
@@ -165,27 +165,27 @@ window.PORTFOLIO_CONFIG = {
 
   services: [
     {
+      title: { es: "Sitios web y landing pages", en: "Websites and landing pages" },
+      desc: { es: "Sitios rápidos, adaptables a celular y fáciles de mantener, publicados y listos para compartir.", en: "Fast, mobile-friendly and easy-to-maintain sites, published and ready to share." },
+      items: {
+        es: ["Landing pages", "Sitios adaptables a celular", "Publicación y despliegue"],
+        en: ["Landing pages", "Mobile-friendly sites", "Publishing and deployment"]
+      }
+    },
+    {
+      title: { es: "Aplicaciones web con APIs", en: "Web apps with APIs" },
+      desc: { es: "Aplicaciones con backend propio e integración de APIs, como mi proyecto FoodieRank.", en: "Apps with their own backend and API integration, like my FoodieRank project." },
+      items: {
+        es: ["API REST con Node.js y Express", "Autenticación con JWT", "Bases de datos MongoDB"],
+        en: ["REST API with Node.js and Express", "JWT authentication", "MongoDB databases"]
+      }
+    },
+    {
       title: { es: "Diseño de interfaces", en: "Interface design" },
       desc: { es: "Pantallas claras y consistentes, pensadas alrededor del usuario.", en: "Clear, consistent screens designed around the user." },
       items: {
         es: ["Prototipos", "Sistema de componentes", "Pruebas de usabilidad"],
         en: ["Prototypes", "Component system", "Usability tests"]
-      }
-    },
-    {
-      title: { es: "Desarrollo web", en: "Web development" },
-      desc: { es: "Sitios y aplicaciones rápidas, accesibles y fáciles de mantener.", en: "Fast, accessible and maintainable sites and apps." },
-      items: {
-        es: ["Landing pages", "Aplicaciones web", "Integración con APIs"],
-        en: ["Landing pages", "Web applications", "API integrations"]
-      }
-    },
-    {
-      title: { es: "Acompañamiento técnico", en: "Technical support" },
-      desc: { es: "Ayuda para llevar tu idea de la pizarra a producción.", en: "Help taking your idea from whiteboard to production." },
-      items: {
-        es: ["Revisión de código", "Despliegue", "Mentoría"],
-        en: ["Code review", "Deployment", "Mentoring"]
       }
     }
   ]
