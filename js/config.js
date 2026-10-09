@@ -41,32 +41,32 @@ window.PORTFOLIO_CONFIG = {
 
   storyDay: [
     {
-      time: "07:00", icon: "☕",
+      time: "07:00",
       title: { es: "Despertar y café", en: "Wake up and coffee" },
       text: { es: "Reviso mensajes y defino las tres prioridades del día.", en: "Check messages and define the day's three priorities." }
     },
     {
-      time: "09:00", icon: "💻",
+      time: "09:00",
       title: { es: "Bloque de código", en: "Deep work block" },
       text: { es: "Sin distracciones: programo, pruebo y resuelvo lo más difícil primero.", en: "No distractions: I code, test and tackle the hardest problem first." }
     },
     {
-      time: "13:00", icon: "🍲",
+      time: "13:00",
       title: { es: "Almuerzo", en: "Lunch" },
       text: { es: "Pausa real, lejos de la pantalla.", en: "A real break, away from the screen." }
     },
     {
-      time: "15:00", icon: "🧩",
+      time: "15:00",
       title: { es: "Aprender y experimentar", en: "Learn and experiment" },
       text: { es: "Tutoriales, pruebas de concepto y revisión de código.", en: "Tutorials, proofs of concept and code review." }
     },
     {
-      time: "18:00", icon: "🏋️",
+      time: "18:00",
       title: { es: "Gimnasio", en: "Gym" },
       text: { es: "Entreno para mantener la energía y la cabeza despejada.", en: "I train to keep my energy up and my mind clear." }
     },
     {
-      time: "21:00", icon: "📚",
+      time: "21:00",
       title: { es: "Lectura y cierre", en: "Reading and wrap-up" },
       text: { es: "Anoto lo aprendido y preparo el siguiente día.", en: "I note what I learned and prepare for tomorrow." }
     }
@@ -144,7 +144,6 @@ window.PORTFOLIO_CONFIG = {
 
   services: [
     {
-      icon: "🎨",
       title: { es: "Diseño de interfaces", en: "Interface design" },
       desc: { es: "Pantallas claras y consistentes, pensadas alrededor del usuario.", en: "Clear, consistent screens designed around the user." },
       items: {
@@ -153,7 +152,6 @@ window.PORTFOLIO_CONFIG = {
       }
     },
     {
-      icon: "⚙️",
       title: { es: "Desarrollo web", en: "Web development" },
       desc: { es: "Sitios y aplicaciones rápidas, accesibles y fáciles de mantener.", en: "Fast, accessible and maintainable sites and apps." },
       items: {
@@ -162,7 +160,6 @@ window.PORTFOLIO_CONFIG = {
       }
     },
     {
-      icon: "🚀",
       title: { es: "Acompañamiento técnico", en: "Technical support" },
       desc: { es: "Ayuda para llevar tu idea de la pizarra a producción.", en: "Help taking your idea from whiteboard to production." },
       items: {

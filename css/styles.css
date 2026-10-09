@@ -853,10 +853,6 @@ p {
   gap: 8px;
 }
 
-.service-icon {
-  font-size: 1.8rem;
-}
-
 .service p {
   color: var(--muted);
   margin: 0;

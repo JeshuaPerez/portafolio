@@ -180,7 +180,7 @@
       li.appendChild(el("time", "story-time", item.time));
 
       var body = el("div", "story-body");
-      body.appendChild(el("h3", "story-title", item.icon + "  " + pick(item.title)));
+      body.appendChild(el("h3", "story-title", pick(item.title)));
       body.appendChild(el("p", "story-text", pick(item.text)));
       li.appendChild(body);
 
@@ -252,7 +252,6 @@
       var card = el("article", "card service reveal");
       card.style.setProperty("--d", (i * 90) + "ms");
 
-      card.appendChild(el("span", "service-icon", service.icon));
       card.appendChild(el("h3", null, pick(service.title)));
       card.appendChild(el("p", null, pick(service.desc)));
 
