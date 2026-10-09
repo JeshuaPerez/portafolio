@@ -557,6 +557,42 @@ p {
   color: var(--muted);
 }
 
+.lifestyle {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.lifestyle-item {
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--card);
+}
+
+.lifestyle-item img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: transform 0.4s var(--ease);
+}
+
+.lifestyle-item:hover img {
+  transform: scale(1.05);
+}
+
+.lifestyle-caption {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  padding: 10px 14px;
+  border-top: 1px solid var(--border);
+}
+
 /* ==========================================================
    STORY DAY
    ========================================================== */

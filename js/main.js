@@ -141,6 +141,7 @@
   function renderAll() {
     renderBio();
     renderStats();
+    renderLifestyle();
     renderStory();
     renderEnvironment();
     renderProjects();
@@ -166,6 +167,24 @@
       item.appendChild(value);
       item.appendChild(el("span", "stat-label", pick(stat.label)));
       box.appendChild(item);
+    });
+  }
+
+  function renderLifestyle() {
+    var box = $("lifestyle");
+    box.innerHTML = "";
+    cfg.lifestyle.forEach(function (item, i) {
+      var fig = el("figure", "lifestyle-item reveal");
+      fig.style.setProperty("--d", (i * 90) + "ms");
+
+      var img = document.createElement("img");
+      img.src = item.photo;
+      img.alt = pick(item.caption);
+      img.loading = "lazy";
+      fig.appendChild(img);
+      fig.appendChild(el("figcaption", "lifestyle-caption", pick(item.caption)));
+
+      box.appendChild(fig);
     });
   }
 

@@ -6,37 +6,45 @@
 window.PORTFOLIO_CONFIG = {
 
   profile: {
-    name: "Tu Nombre",
-    title: { es: "Tu Nombre · Portafolio", en: "Your Name · Portfolio" },
-    role: { es: "Desarrollador Full Stack", en: "Full Stack Developer" },
+    name: "Jeshua Odsman Pérez López",
+    title: { es: "Jeshua Pérez · Portafolio", en: "Jeshua Pérez · Portfolio" },
+    role: { es: "Técnico en Desarrollo de Software", en: "Software Development Technician" },
     roles: {
-      es: ["Desarrollador frontend", "Creador de interfaces", "Estudiante de software", "Resolutor de problemas"],
-      en: ["Frontend developer", "Interface builder", "Software student", "Problem solver"]
+      es: ["Técnico en Desarrollo de Software", "Perito Contador", "Estudiante de tecnología", "Entusiasta de la IA"],
+      en: ["Software Development Technician", "Accounting Technician", "Tech student", "AI enthusiast"]
     },
-    location: { es: "Guatemala", en: "Guatemala" },
+    location: { es: "Santa Catarina Pinula, Guatemala", en: "Santa Catarina Pinula, Guatemala" },
     timezone: "America/Guatemala",
-    email: "tu.correo@ejemplo.com",
-    github: "https://github.com/tu-usuario",
-    linkedin: "https://www.linkedin.com/in/tu-usuario",
-    cv: "assets/cv.pdf",
-    photo: "assets/img/perfil.svg"
+    email: "perezjeshua0999@gmail.com",
+    github: "https://github.com/JeshuaPerez",
+    linkedin: "https://www.linkedin.com/in/jeshua-perez-ods2007",
+    cv: "assets/CV_Jeshua_Perez.pdf",
+    photo: "assets/img/Perfil.jpeg"
   },
 
   bio: {
     es: [
-      "Soy desarrollador enfocado en crear interfaces claras y sistemas que funcionan. Me gusta convertir ideas en productos reales, desde el diseño hasta el despliegue.",
-      "Aprendo construyendo: cada proyecto es una oportunidad para mejorar mi código, mi diseño y la forma en que comunico lo que hago."
+      "Soy un desarrollador entusiasta, retador conmigo mismo y enfocado en crear interfaces claras y sistemas que funcionan. Me gusta convertir mis ideas en proyectos reales, desde el diseño hasta el despliegue, investigando tecnologías nuevas y avanzando paso a paso.",
+      "Aprendo construyendo: cada proyecto es una oportunidad para mejorar mi código, mi diseño y la forma en que comunico lo que hago, apoyándome en la inteligencia artificial como mi principal aliada de aprendizaje y diseño.",
+      "Fuera del código me gustan los retos: entreno cuerpo y mente con disciplina, y disfruto deportes de adrenalina como el motocross, el enduro, el downhill y el fútbol. Soy creyente, le doy mucho valor a los pequeños momentos junto a mi familia y disfruto perderme en la naturaleza (senderos, montañas, bosques y ríos) tanto como compartir tiempo con mis amigos."
     ],
     en: [
-      "I'm a developer focused on building clear interfaces and systems that work. I enjoy turning ideas into real products, from design to deployment.",
-      "I learn by building: every project is a chance to improve my code, my design and the way I communicate what I do."
+      "I'm an enthusiastic developer who challenges himself to build clear interfaces and systems that work. I enjoy turning my ideas into real projects, from design to deployment, researching new technologies and moving forward step by step.",
+      "I learn by building: every project is a chance to improve my code, my design and the way I communicate what I do, leaning on artificial intelligence as my main ally for learning and design.",
+      "Outside of code I love a challenge: I train my body and mind with discipline, and I enjoy adrenaline sports like motocross, enduro, downhill and soccer. I'm a person of faith, I treasure small moments with my family, and I love getting lost in nature (trails, mountains, forests and rivers) as much as spending time with my friends."
     ]
   },
 
+  lifestyle: [
+    { photo: "assets/img/dh.jpg", caption: { es: "Downhill", en: "Downhill" } },
+    { photo: "assets/img/enduro.jpg", caption: { es: "Enduro", en: "Enduro" } },
+    { photo: "assets/img/montana.jpg", caption: { es: "Montaña y senderismo", en: "Mountains & hiking" } }
+  ],
+
   stats: [
-    { value: 3, label: { es: "Años programando", en: "Years coding" } },
-    { value: 12, label: { es: "Proyectos", en: "Projects" } },
-    { value: 8, label: { es: "Tecnologías", en: "Technologies" } }
+    { value: 17, label: { es: "Cursos completados", en: "Courses completed" } },
+    { value: 9, label: { es: "Proyectos en GitHub", en: "GitHub projects" } },
+    { value: 9, label: { es: "Tecnologías", en: "Technologies" } }
   ],
 
   storyDay: [
@@ -74,71 +82,83 @@ window.PORTFOLIO_CONFIG = {
 
   environment: {
     info: [
-      { key: "OS", value: "Ubuntu 24.04 LTS" },
-      { key: "Shell", value: "zsh + oh-my-zsh" },
+      { key: "OS", value: "Linux" },
       { key: "Editor", value: "VS Code" },
-      { key: "Font", value: "JetBrains Mono" },
-      { key: "Theme", value: { es: "Tokyo Night (oscuro)", en: "Tokyo Night (dark)" } },
-      { key: "Node", value: "v22 LTS" },
-      { key: "Setup", value: { es: "Laptop + monitor externo", en: "Laptop + external monitor" } }
+      { key: "Versionado", value: "Git + GitHub" },
+      { key: "Contenedores", value: "Docker" },
+      { key: "Notas", value: "Notion" },
+      { key: "IA", value: "Claude · Gemini · ChatGPT" }
     ],
     tools: [
       {
         name: "VS Code",
         category: { es: "Editor", en: "Editor" },
-        note: { es: "Extensiones de Prettier, ESLint y GitLens.", en: "Prettier, ESLint and GitLens extensions." }
+        note: { es: "Mi editor principal para frontend, backend y scripts.", en: "My main editor for frontend, backend and scripts." }
       },
       {
         name: "Git & GitHub",
         category: { es: "Control de versiones", en: "Version control" },
-        note: { es: "Ramas cortas, commits descriptivos y revisiones.", en: "Short branches, clear commits and reviews." }
+        note: { es: "Repositorios, control de versiones y mi portafolio de proyectos.", en: "Repositories, version control and my project portfolio." }
       },
       {
-        name: "Node.js",
-        category: { es: "Runtime", en: "Runtime" },
-        note: { es: "Scripts, APIs con Express y herramientas de build.", en: "Scripts, Express APIs and build tools." }
+        name: "Docker",
+        category: { es: "Entorno", en: "Environment" },
+        note: { es: "Contenedores para bases de datos y servicios locales.", en: "Containers for databases and local services." }
       },
       {
-        name: "Figma",
-        category: { es: "Diseño", en: "Design" },
-        note: { es: "Prototipos, sistemas de componentes y handoff.", en: "Prototypes, component systems and handoff." }
+        name: "Notion",
+        category: { es: "Organización", en: "Organization" },
+        note: { es: "Tableros Scrum, notas y seguimiento de proyectos.", en: "Scrum boards, notes and project tracking." }
+      },
+      {
+        name: "Claude · Gemini · ChatGPT",
+        category: { es: "Asistentes de IA", en: "AI assistants" },
+        note: { es: "Apoyo para aprender, depurar y acelerar el desarrollo.", en: "Support for learning, debugging and speeding up development." }
       }
     ]
   },
 
   projects: [
     {
-      slug: "tienda-en-linea",
-      title: "Tienda en línea",
+      slug: "foodierank",
+      title: "FoodieRank",
       description: {
-        es: "Catálogo con carrito, pagos de prueba y panel de administración.",
-        en: "Online store with a cart, test payments and an admin panel."
+        es: "Plataforma para calificar y rankear restaurantes: reseñas con estrellas, likes/dislikes y un ranking calculado automáticamente. API REST con autenticación JWT y panel para administrar categorías.",
+        en: "Platform to rate and rank restaurants: star reviews, likes/dislikes and an automatically calculated ranking. REST API with JWT auth and an admin panel for categories."
       },
-      stack: ["JavaScript", "Node.js", "Express", "MongoDB"],
-      demo: "#",
-      repo: "https://github.com/tu-usuario/tienda-en-linea"
+      stack: ["Node.js", "Express", "MongoDB", "JWT", "JavaScript"],
+      demo: "https://jeshuaperez.github.io/FoodieRank-frontend/",
+      repo: "https://github.com/JeshuaPerez/FoodieRank-backend"
     },
     {
-      slug: "gestor-de-tareas",
-      title: "Gestor de tareas",
+      slug: "downhill-bikes",
+      title: "Downhill Bikes",
       description: {
-        es: "App con arrastrar y soltar, filtros y datos guardados en el navegador.",
-        en: "Drag-and-drop task app with filters and browser storage."
+        es: "Sitio temático sobre downhill: landing con atletas, registro de usuarios y contenido multimedia. Proyecto de práctica de HTML y CSS, en honor a uno de mis deportes favoritos.",
+        en: "Downhill-themed site: a landing page with athletes, user registration and media content. An HTML/CSS practice project, in honor of one of my favorite sports."
+      },
+      stack: ["HTML", "CSS"],
+      repo: "https://github.com/JeshuaPerez/Proyecto_HTML_tema_Libre"
+    },
+    {
+      slug: "conciertos-conectados",
+      title: "Conciertos Conectados",
+      description: {
+        es: "Plataforma para gestionar y vender entradas a conciertos y eventos en vivo en Guatemala, con panel de administración y datos persistidos en el navegador.",
+        en: "Platform to manage and sell tickets for concerts and live events in Guatemala, with an admin panel and browser-based data storage."
       },
       stack: ["JavaScript", "HTML", "CSS"],
-      demo: "#",
-      repo: "https://github.com/tu-usuario/gestor-de-tareas"
+      repo: "https://github.com/JeshuaPerez/Proyecto_Conciertos_P-rez_Jeshua"
     },
     {
-      slug: "dashboard-clima",
-      title: "Dashboard del clima",
+      slug: "gestion-inmuebles",
+      title: "Gestión de inmuebles",
       description: {
-        es: "Consume una API pública y muestra gráficas interactivas por ciudad.",
-        en: "Consumes a public API and shows interactive charts by city."
+        es: "Listado y edición de propiedades inmobiliarias: alta, edición y eliminación de inmuebles desde el navegador.",
+        en: "Listing and editing of real estate properties: create, edit and delete listings from the browser."
       },
-      stack: ["TypeScript", "React", "Chart.js"],
-      demo: "#",
-      repo: "https://github.com/tu-usuario/dashboard-clima"
+      stack: ["JavaScript", "HTML", "CSS"],
+      repo: "https://github.com/JeshuaPerez/proyecto_review"
     }
   ],
 
