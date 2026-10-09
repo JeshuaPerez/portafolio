@@ -407,6 +407,7 @@ p {
 
 .hero-card img {
   width: 100%;
+  height: auto;
   aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: center top;
@@ -1017,6 +1018,10 @@ p {
     max-width: 320px;
   }
 
+  .hero-card img {
+    aspect-ratio: 1;
+  }
+
   .day-layout {
     grid-template-columns: 1fr;
   }
@@ -1056,6 +1061,23 @@ p {
 
   .stats {
     gap: 10px;
+  }
+
+  .lifestyle {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .lifestyle-item:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  .lifestyle-item img {
+    aspect-ratio: 1;
+  }
+
+  .lifestyle-item:last-child:nth-child(odd) img {
+    aspect-ratio: 16 / 9;
   }
 
   .stat-value {
