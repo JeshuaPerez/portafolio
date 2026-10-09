@@ -92,6 +92,10 @@
     $("nowLocation").textContent = pick(cfg.profile.location);
     $("aboutPhoto").src = cfg.profile.photo;
     $("aboutPhoto").alt = cfg.profile.name;
+    $("heroPhoto").src = cfg.profile.photoHero || cfg.profile.photo;
+    $("heroPhoto").alt = cfg.profile.name;
+    $("heroCardName").textContent = cfg.profile.name;
+    $("heroCardRole").textContent = pick(cfg.profile.role) + " · " + pick(cfg.profile.location);
     $("linkCv").href = cfg.profile.cv;
     $("linkGithub").href = cfg.profile.github;
     $("linkLinkedin").href = cfg.profile.linkedin;

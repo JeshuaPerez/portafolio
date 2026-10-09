@@ -19,7 +19,8 @@ window.PORTFOLIO_CONFIG = {
     github: "https://github.com/JeshuaPerez",
     linkedin: "https://www.linkedin.com/in/jeshua-perez-ods2007",
     cv: "assets/CV_Jeshua_Perez.pdf",
-    photo: "assets/img/Perfil.jpeg"
+    photo: "assets/img/Perfil.jpeg",
+    photoHero: "assets/img/Perfil-profesional.png"
   },
 
   bio: {

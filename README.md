@@ -39,8 +39,8 @@ python3 -m http.server 8000
 ## Cómo personalizarlo
 
 1. Abre `js/config.js` y reemplaza los datos de ejemplo: nombre, correo, GitHub, LinkedIn, estadísticas, rutina, herramientas, proyectos y servicios.
-2. Reemplaza `assets/img/perfil.svg` por tu foto (puedes cambiar la ruta en `profile.photo`). Usa una imagen cuadrada.
-3. Agrega tu CV como `assets/cv.pdf`.
+2. Reemplaza `assets/img/Perfil.jpeg` por tu foto (puedes cambiar la ruta en `profile.photo`). Usa una imagen cuadrada.
+3. Actualiza tu CV en `assets/CV_Jeshua_Perez.pdf`.
 4. Para cambiar la paleta, edita las variables de color en `css/styles.css` (bloques `[data-theme="dark"]` y `[data-theme="light"]`).
 
 Los textos bilingües usan la forma `{ es: "...", en: "..." }`. Si agregas un texto nuevo, escribe siempre ambos idiomas.
