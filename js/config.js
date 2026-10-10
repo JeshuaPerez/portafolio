@@ -33,11 +33,11 @@ window.PORTFOLIO_CONFIG = {
   /* ---------- SOBRE MÍ: trayectoria y diferenciadores ---------- */
   bio: {
     es: [
-      "Soy Técnico en Desarrollo de Software y me enfoco en la parte que no se ve: el servidor, la base de datos y la API que sostienen una aplicación. Mi proyecto más completo, FoodieRank, es una API REST con Node.js, Express y MongoDB, con autenticación JWT y un ranking que se calcula del lado del servidor.",
+      "Soy Técnico en Desarrollo de Software y me enfoco en la parte que no se ve: el servidor, la base de datos y la API que sostienen una aplicación. Mi proyecto más completo es FoodieRank, hecho en equipo con metodología Scrum: una API REST con Node.js, Express y MongoDB, con autenticación JWT y un ranking que se calcula del lado del servidor.",
       "Antes de programar estudié Perito Contador, y eso cambió la forma en que escribo backend: estoy acostumbrado a cuadrar cifras, respetar reglas de negocio y desconfiar de un dato que no coincide. Cuando modelo una base de datos o valido una petición, pienso primero en la integridad de la información."
     ],
     en: [
-      "I am a Software Development Technician focused on the part you do not see: the server, the database and the API that hold an application together. My most complete project, FoodieRank, is a REST API built with Node.js, Express and MongoDB, with JWT authentication and a ranking calculated server-side.",
+      "I am a Software Development Technician focused on the part you do not see: the server, the database and the API that hold an application together. My most complete project is FoodieRank, built as a team with Scrum: a REST API with Node.js, Express and MongoDB, with JWT authentication and a ranking calculated server-side.",
       "Before programming I trained as an Accounting Technician, and that shaped how I write backend code: I am used to balancing figures, respecting business rules and distrusting a number that does not add up. When I model a database or validate a request, I think about data integrity first."
     ]
   },
@@ -71,15 +71,15 @@ window.PORTFOLIO_CONFIG = {
     {
       slug: "foodierank",
       title: "FoodieRank",
-      kind: { es: "Backend · API REST", en: "Backend · REST API" },
+      kind: { es: "Backend · API REST · En equipo", en: "Backend · REST API · Team project" },
       cover: "",
       description: {
         es: "Plataforma para calificar y rankear restaurantes: reseñas con estrellas, likes/dislikes y un ranking calculado automáticamente. API REST con autenticación JWT y panel para administrar categorías.",
         en: "Platform to rate and rank restaurants: star reviews, likes/dislikes and an automatically calculated ranking. REST API with JWT auth and an admin panel for categories."
       },
       highlight: {
-        es: "Mi proyecto más completo: modelado de datos, rutas protegidas por rol y cálculo del ranking en el servidor.",
-        en: "My most complete project: data modeling, role-protected routes and server-side ranking calculation."
+        es: "Proyecto en equipo de dos personas con metodología Scrum. Mi trabajo se concentró en la API: modelado de datos, rutas protegidas por rol y el cálculo del ranking en el servidor.",
+        en: "A two-person team project run with Scrum. My work focused on the API: data modeling, role-protected routes and server-side ranking calculation."
       },
       stack: ["Node.js", "Express", "MongoDB", "JWT", "JavaScript"],
       demo: "https://jeshuaperez.github.io/FoodieRank-frontend/",
@@ -95,11 +95,11 @@ window.PORTFOLIO_CONFIG = {
         en: "Platform to manage and sell tickets for concerts and live events in Guatemala, with an admin panel and browser-based data storage."
       },
       highlight: {
-        es: "Control de inventario de entradas, cálculo de totales y un panel de administración sobre datos persistidos.",
-        en: "Ticket inventory control, total calculations and an admin panel over persisted data."
+        es: "Construido con Web Components nativos: carrito, checkout y un panel de administración con estadísticas de ventas.",
+        en: "Built with native Web Components: cart, checkout and an admin panel with sales statistics."
       },
-      stack: ["JavaScript", "HTML", "CSS"],
-      repo: "https://github.com/JeshuaPerez/Proyecto_Conciertos_P-rez_Jeshua"
+      stack: ["JavaScript", "Web Components", "HTML", "CSS"],
+      repo: "https://github.com/JeshuaPerez/conciertos-conectados"
     },
     {
       slug: "gestion-inmuebles",
@@ -107,15 +107,15 @@ window.PORTFOLIO_CONFIG = {
       kind: { es: "CRUD completo", en: "Full CRUD" },
       cover: "",
       description: {
-        es: "Listado y edición de propiedades inmobiliarias: alta, edición y eliminación de inmuebles desde el navegador, con validación de formularios.",
-        en: "Listing and editing of real estate properties: create, edit and delete listings from the browser, with form validation."
+        es: "Gestor de propiedades inmobiliarias: listado con búsqueda en tiempo real y paginación, alta y edición con validación, y borrado con confirmación.",
+        en: "Real estate manager: listing with live search and pagination, create and edit with validation, and delete with confirmation."
       },
       highlight: {
-        es: "Las cuatro operaciones de un CRUD con validación de datos antes de guardar.",
-        en: "The four CRUD operations with data validation before saving."
+        es: "CRUD completo cuidando los casos borde: búsqueda sin resultados y páginas que dejan de existir al borrar registros.",
+        en: "A full CRUD that handles the edge cases: empty search results and pages that stop existing when records are deleted."
       },
       stack: ["JavaScript", "HTML", "CSS"],
-      repo: "https://github.com/JeshuaPerez/proyecto_review"
+      repo: "https://github.com/JeshuaPerez/gestion-inmuebles"
     },
     {
       slug: "downhill-bikes",
@@ -131,7 +131,7 @@ window.PORTFOLIO_CONFIG = {
         en: "Responsive markup from scratch, with no frameworks or templates."
       },
       stack: ["HTML", "CSS"],
-      repo: "https://github.com/JeshuaPerez/Proyecto_HTML_tema_Libre"
+      repo: "https://github.com/JeshuaPerez/downhill-bikes"
     }
   ],
 
