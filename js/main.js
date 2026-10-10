@@ -134,17 +134,27 @@
 
   // ---------- Renderizado ----------
 
+  // Cada bloque se dibuja por separado: si a config.js le falta una clave,
+  // solo se pierde esa sección y el resto de la página sigue funcionando.
   function renderAll() {
-    renderHeroFacts();
-    renderProjects();
-    renderBio();
-    renderStats();
-    renderDifferentiators();
-    renderSkills();
-    renderEnvironment();
-    renderServices();
-    renderLifestyle();
-    renderRoutine();
+    [
+      ["heroFacts", renderHeroFacts],
+      ["projects", renderProjects],
+      ["bio", renderBio],
+      ["stats", renderStats],
+      ["differentiators", renderDifferentiators],
+      ["skills", renderSkills],
+      ["environment", renderEnvironment],
+      ["services", renderServices],
+      ["lifestyle", renderLifestyle],
+      ["storyDay", renderRoutine]
+    ].forEach(function (block) {
+      try {
+        block[1]();
+      } catch (e) {
+        if (window.console) console.warn("No se pudo dibujar '" + block[0] + "':", e);
+      }
+    });
     observeReveals();
   }
 
