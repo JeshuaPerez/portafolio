@@ -89,7 +89,7 @@ window.PORTFOLIO_CONFIG = {
       slug: "conciertos-conectados",
       title: "Conciertos Conectados",
       kind: { es: "Aplicación web · Lógica de negocio", en: "Web app · Business logic" },
-      cover: "",
+      cover: "assets/img/projects/conciertos-conectados.webp",
       description: {
         es: "Plataforma para gestionar y vender entradas a conciertos y eventos en vivo en Guatemala, con panel de administración y datos persistidos en el navegador.",
         en: "Platform to manage and sell tickets for concerts and live events in Guatemala, with an admin panel and browser-based data storage."
@@ -99,13 +99,14 @@ window.PORTFOLIO_CONFIG = {
         en: "Built with native Web Components: cart, checkout and an admin panel with sales statistics."
       },
       stack: ["JavaScript", "Web Components", "HTML", "CSS"],
+      demo: "https://jeshuaperez.github.io/conciertos-conectados/",
       repo: "https://github.com/JeshuaPerez/conciertos-conectados"
     },
     {
       slug: "stream-music-app",
       title: "MusicStream",
       kind: { es: "Frontend · 7 pantallas", en: "Frontend · 7 screens" },
-      cover: "",
+      cover: "assets/img/projects/stream-music-app.webp",
       description: {
         es: "Interfaz completa de una plataforma de streaming y venta de música: portada, detalle de álbum, reproductor, carrito, pago y perfil. Siete pantallas maquetadas a mano, sin frameworks.",
         en: "Full interface for a music streaming and store platform: home, album detail, player, cart, checkout and profile. Seven screens hand-coded, with no frameworks."
@@ -115,13 +116,14 @@ window.PORTFOLIO_CONFIG = {
         en: "Semantic HTML5 throughout and CSS split into base, layout and reusable components."
       },
       stack: ["HTML5", "CSS3", "Diseño responsive"],
+      demo: "https://jeshuaperez.github.io/stream-music-app/",
       repo: "https://github.com/JeshuaPerez/stream-music-app"
     },
     {
       slug: "downhill-bikes",
       title: "Downhill Bikes",
       kind: { es: "Frontend · Maquetación", en: "Frontend · Markup" },
-      cover: "",
+      cover: "assets/img/projects/downhill-bikes.webp",
       description: {
         es: "Sitio temático sobre downhill: landing con atletas, registro de usuarios y contenido multimedia. Proyecto de práctica de HTML y CSS, en honor a uno de mis deportes favoritos.",
         en: "Downhill-themed site: a landing page with athletes, user registration and media content. An HTML/CSS practice project, in honor of one of my favorite sports."
@@ -131,6 +133,7 @@ window.PORTFOLIO_CONFIG = {
         en: "Responsive markup from scratch, with no frameworks or templates."
       },
       stack: ["HTML", "CSS"],
+      demo: "https://jeshuaperez.github.io/downhill-bikes/",
       repo: "https://github.com/JeshuaPerez/downhill-bikes"
     }
   ],
