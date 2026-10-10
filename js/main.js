@@ -10,10 +10,9 @@
   var lang = detectLang();
   var typeTimer = null;
   var clockTimer = null;
-  var storyObserver = null;
   var revealObserver = null;
-  var termHistory = [];
-  var termIndex = 0;
+  var pendingReveals = [];
+  var lastSweep = 0;
 
   // ---------- Utilidades ----------
 
@@ -56,20 +55,6 @@
     return (navigator.language || "es").indexOf("en") === 0 ? "en" : "es";
   }
 
-  function allTech() {
-    var seen = {};
-    var list = [];
-    cfg.projects.forEach(function (project) {
-      project.stack.forEach(function (tech) {
-        if (!seen[tech]) {
-          seen[tech] = true;
-          list.push(tech);
-        }
-      });
-    });
-    return list;
-  }
-
   // ---------- Idioma y tema ----------
 
   function applyStaticText() {
@@ -86,16 +71,23 @@
       node.setAttribute("aria-label", t(node.getAttribute("data-i18n-aria")));
     });
 
-    $("brandName").textContent = cfg.profile.name;
+    $("brandName").textContent = cfg.profile.brand || cfg.profile.name;
     $("heroName").textContent = cfg.profile.name;
     $("footerName").textContent = cfg.profile.name;
     $("nowLocation").textContent = pick(cfg.profile.location);
+    $("personalText").textContent = pick(cfg.personal);
+
     $("aboutPhoto").src = cfg.profile.photo;
     $("aboutPhoto").alt = cfg.profile.name;
     $("heroPhoto").src = cfg.profile.photoHero || cfg.profile.photo;
     $("heroPhoto").alt = cfg.profile.name;
     $("heroCardName").textContent = cfg.profile.name;
     $("heroCardRole").textContent = pick(cfg.profile.role) + " · " + pick(cfg.profile.location);
+
+    $("heroCv").href = cfg.profile.cv;
+    $("heroGithub").href = cfg.profile.github;
+    $("heroLinkedin").href = cfg.profile.linkedin;
+    $("allRepos").href = cfg.profile.github;
     $("linkCv").href = cfg.profile.cv;
     $("linkGithub").href = cfg.profile.github;
     $("linkLinkedin").href = cfg.profile.linkedin;
@@ -143,14 +135,25 @@
   // ---------- Renderizado ----------
 
   function renderAll() {
+    renderHeroFacts();
+    renderProjects();
     renderBio();
     renderStats();
-    renderLifestyle();
-    renderStory();
+    renderDifferentiators();
+    renderSkills();
     renderEnvironment();
-    renderProjects();
     renderServices();
+    renderLifestyle();
+    renderRoutine();
     observeReveals();
+  }
+
+  function renderHeroFacts() {
+    var box = $("heroFacts");
+    box.innerHTML = "";
+    pick(cfg.heroFacts).forEach(function (fact) {
+      box.appendChild(el("li", null, fact));
+    });
   }
 
   function renderBio() {
@@ -174,6 +177,172 @@
     });
   }
 
+  function renderDifferentiators() {
+    var box = $("diffGrid");
+    box.innerHTML = "";
+    pick(cfg.differentiators).forEach(function (item, i) {
+      var card = el("article", "diff reveal");
+      card.style.setProperty("--d", (i * 70) + "ms");
+      card.appendChild(el("span", "diff-index", "0" + (i + 1)));
+      card.appendChild(el("h4", "diff-title", item.title));
+      card.appendChild(el("p", null, item.text));
+      box.appendChild(card);
+    });
+  }
+
+  // ---------- Proyectos ----------
+
+  function projectCover(project) {
+    var figure = el("figure", "project-cover");
+
+    if (project.cover) {
+      var img = document.createElement("img");
+      img.src = project.cover;
+      img.alt = project.title + " — " + t("projects.coverAlt");
+      img.loading = "lazy";
+      figure.appendChild(img);
+      return figure;
+    }
+
+    // Sin captura: portada generada con el nombre y el stack principal.
+    figure.className = "project-cover is-generated";
+    var inner = el("div", "cover-inner");
+    inner.appendChild(el("span", "cover-prompt", "~/" + project.slug));
+    inner.appendChild(el("strong", "cover-title", project.title));
+    inner.appendChild(el("span", "cover-stack", project.stack.slice(0, 3).join(" · ")));
+    figure.appendChild(inner);
+    return figure;
+  }
+
+  function renderProjects() {
+    var grid = $("projectGrid");
+    grid.innerHTML = "";
+    cfg.projects.forEach(function (project, i) {
+      var card = el("article", "card project reveal");
+      card.style.setProperty("--d", (i * 90) + "ms");
+
+      card.appendChild(projectCover(project));
+
+      var body = el("div", "project-body");
+      var head = el("div", "project-head");
+      head.appendChild(el("span", "project-kind", pick(project.kind)));
+      head.appendChild(el("span", "project-index", "0" + (i + 1)));
+      body.appendChild(head);
+
+      body.appendChild(el("h3", null, project.title));
+      body.appendChild(el("p", "project-desc", pick(project.description)));
+
+      if (project.highlight) {
+        body.appendChild(el("p", "project-highlight", pick(project.highlight)));
+      }
+
+      var tags = el("ul", "tags");
+      project.stack.forEach(function (tech) {
+        tags.appendChild(el("li", "tag", tech));
+      });
+      body.appendChild(tags);
+
+      var links = el("div", "project-links");
+      if (project.demo) links.appendChild(makeLink(project.demo, t("projects.demo")));
+      if (project.repo) links.appendChild(makeLink(project.repo, t("projects.code")));
+      body.appendChild(links);
+
+      card.appendChild(body);
+      grid.appendChild(card);
+    });
+  }
+
+  function makeLink(href, label) {
+    var a = el("a", "text-link", label);
+    a.href = href;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    return a;
+  }
+
+  // ---------- Habilidades, entorno y servicios ----------
+
+  function renderSkills() {
+    var grid = $("skillGrid");
+    grid.innerHTML = "";
+    cfg.skills.groups.forEach(function (group, i) {
+      var card = el("article", "card skill reveal" + (group.main ? " is-main" : ""));
+      card.style.setProperty("--d", (i * 80) + "ms");
+
+      card.appendChild(el("h3", null, pick(group.title)));
+      if (group.note) card.appendChild(el("p", "skill-note", pick(group.note)));
+
+      var list = el("ul", "tags skill-tags");
+      group.items.forEach(function (item) {
+        list.appendChild(el("li", "tag" + (group.main ? " is-strong" : ""), item));
+      });
+      card.appendChild(list);
+
+      grid.appendChild(card);
+    });
+
+    var practices = $("practiceList");
+    practices.innerHTML = "";
+    pick(cfg.skills.practices).forEach(function (item, i) {
+      var li = el("li", "practice reveal", item);
+      li.style.setProperty("--d", (i * 50) + "ms");
+      practices.appendChild(li);
+    });
+  }
+
+  function renderEnvironment() {
+    var info = $("neofetch");
+    info.innerHTML = "";
+    cfg.environment.info.forEach(function (row) {
+      var line = el("div", "nf-line");
+      line.appendChild(el("span", "nf-key", row.key));
+      line.appendChild(el("span", "nf-val", pick(row.value)));
+      info.appendChild(line);
+    });
+
+    var grid = $("toolGrid");
+    grid.innerHTML = "";
+    cfg.environment.tools.forEach(function (tool, i) {
+      var card = el("article", "card tool reveal");
+      card.style.setProperty("--d", (i * 60) + "ms");
+      card.appendChild(el("span", "kicker", pick(tool.category)));
+      card.appendChild(el("h3", null, tool.name));
+      card.appendChild(el("p", null, pick(tool.note)));
+      grid.appendChild(card);
+    });
+  }
+
+  function renderServices() {
+    var grid = $("serviceGrid");
+    grid.innerHTML = "";
+    cfg.services.forEach(function (service, i) {
+      var card = el("article", "card service reveal");
+      card.style.setProperty("--d", (i * 90) + "ms");
+
+      card.appendChild(el("h3", null, pick(service.title)));
+
+      if (service.pain) {
+        var pain = el("div", "service-pain");
+        pain.appendChild(el("span", "pain-label", t("services.pain")));
+        pain.appendChild(el("p", null, pick(service.pain)));
+        card.appendChild(pain);
+      }
+
+      card.appendChild(el("span", "service-label", t("services.solution")));
+      card.appendChild(el("p", "service-desc", pick(service.desc)));
+
+      var list = el("ul", "service-list");
+      pick(service.items).forEach(function (item) {
+        list.appendChild(el("li", null, item));
+      });
+      card.appendChild(list);
+
+      grid.appendChild(card);
+    });
+  }
+
+  // ---------- Fuera del código ----------
+
   function renderLifestyle() {
     var box = $("lifestyle");
     box.innerHTML = "";
@@ -192,100 +361,61 @@
     });
   }
 
-  function renderStory() {
-    var list = $("timeline");
+  function renderRoutine() {
+    var list = $("routine");
     list.innerHTML = "";
     cfg.storyDay.forEach(function (item, i) {
-      var li = el("li", "story-item reveal");
-      li.style.setProperty("--d", (i * 90) + "ms");
+      var li = el("li", "routine-item reveal");
+      li.style.setProperty("--d", (i * 60) + "ms");
       li.dataset.index = String(i);
 
-      li.appendChild(el("time", "story-time", item.time));
-
-      var body = el("div", "story-body");
-      body.appendChild(el("h3", "story-title", pick(item.title)));
-      body.appendChild(el("p", "story-text", pick(item.text)));
-      li.appendChild(body);
+      li.appendChild(el("time", "routine-time", item.time));
+      li.appendChild(el("h4", "routine-title", pick(item.title)));
+      li.appendChild(el("p", "routine-text", pick(item.text)));
 
       list.appendChild(li);
     });
-    watchStory();
+    markRoutineProgress();
   }
 
-  function renderEnvironment() {
-    var info = $("neofetch");
-    info.innerHTML = "";
-    cfg.environment.info.forEach(function (row) {
-      var line = el("div", "nf-line");
-      line.appendChild(el("span", "nf-key", row.key));
-      line.appendChild(el("span", "nf-val", pick(row.value)));
-      info.appendChild(line);
+  // Marca el bloque de la rutina según la hora real en Guatemala.
+  function markRoutineProgress() {
+    var items = document.querySelectorAll(".routine-item");
+    if (!items.length) return;
+
+    var minutesNow = localMinutes();
+    var first = toMinutes(cfg.storyDay[0].time);
+    var last = toMinutes(cfg.storyDay[cfg.storyDay.length - 1].time);
+    var activeIndex = -1;
+
+    cfg.storyDay.forEach(function (item, i) {
+      if (minutesNow >= toMinutes(item.time)) activeIndex = i;
     });
 
-    var grid = $("toolGrid");
-    grid.innerHTML = "";
-    cfg.environment.tools.forEach(function (tool, i) {
-      var card = el("article", "card tool reveal");
-      card.style.setProperty("--d", (i * 80) + "ms");
-      card.appendChild(el("span", "kicker", pick(tool.category)));
-      card.appendChild(el("h3", null, tool.name));
-      card.appendChild(el("p", null, pick(tool.note)));
-      grid.appendChild(card);
+    items.forEach(function (node, i) {
+      node.classList.toggle("is-active", i === activeIndex);
+      node.classList.toggle("is-past", activeIndex > -1 && i < activeIndex);
     });
+
+    var span = last - first;
+    var ratio = span > 0 ? (minutesNow - first) / span : 0;
+    ratio = Math.max(0, Math.min(1, ratio));
+    $("dayProgress").style.width = (ratio * 100) + "%";
   }
 
-  function renderProjects() {
-    var grid = $("projectGrid");
-    grid.innerHTML = "";
-    cfg.projects.forEach(function (project, i) {
-      var card = el("article", "card project reveal");
-      card.style.setProperty("--d", (i * 90) + "ms");
-
-      card.appendChild(el("span", "project-index", "0" + (i + 1)));
-      card.appendChild(el("h3", null, project.title));
-      card.appendChild(el("p", null, pick(project.description)));
-
-      var tags = el("ul", "tags");
-      project.stack.forEach(function (tech) {
-        tags.appendChild(el("li", "tag", tech));
-      });
-      card.appendChild(tags);
-
-      var links = el("div", "project-links");
-      if (project.demo) links.appendChild(makeLink(project.demo, t("projects.demo")));
-      if (project.repo) links.appendChild(makeLink(project.repo, t("projects.code")));
-      card.appendChild(links);
-
-      grid.appendChild(card);
-    });
+  function toMinutes(hhmm) {
+    var parts = String(hhmm).split(":");
+    return (Number(parts[0]) || 0) * 60 + (Number(parts[1]) || 0);
   }
 
-  function makeLink(href, label) {
-    var a = el("a", "text-link", label);
-    a.href = href;
-    a.target = "_blank";
-    a.rel = "noopener noreferrer";
-    return a;
-  }
-
-  function renderServices() {
-    var grid = $("serviceGrid");
-    grid.innerHTML = "";
-    cfg.services.forEach(function (service, i) {
-      var card = el("article", "card service reveal");
-      card.style.setProperty("--d", (i * 90) + "ms");
-
-      card.appendChild(el("h3", null, pick(service.title)));
-      card.appendChild(el("p", null, pick(service.desc)));
-
-      var list = el("ul", "service-list");
-      pick(service.items).forEach(function (item) {
-        list.appendChild(el("li", null, item));
-      });
-      card.appendChild(list);
-
-      grid.appendChild(card);
-    });
+  function localMinutes() {
+    var parts = new Intl.DateTimeFormat("en-GB", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+      timeZone: cfg.profile.timezone
+    }).format(new Date());
+    return toMinutes(parts);
   }
 
   // ---------- Animaciones ----------
@@ -310,15 +440,20 @@
     requestAnimationFrame(step);
   }
 
+  function showNode(node) {
+    if (node.classList.contains("counter")) animateCounter(node);
+    node.classList.add("is-visible");
+    var at = pendingReveals.indexOf(node);
+    if (at > -1) pendingReveals.splice(at, 1);
+  }
+
   function observeReveals() {
     if (!revealObserver) {
       revealObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (!entry.isIntersecting) return;
-          var node = entry.target;
-          if (node.classList.contains("counter")) animateCounter(node);
-          node.classList.add("is-visible");
-          revealObserver.unobserve(node);
+          showNode(entry.target);
+          revealObserver.unobserve(entry.target);
         });
       }, { threshold: 0.15 });
     }
@@ -327,21 +462,37 @@
       if (node.dataset.watching) return;
       node.dataset.watching = "1";
       if (reduceMotion) {
-        node.classList.add("is-visible");
-        if (node.classList.contains("counter")) animateCounter(node);
+        showNode(node);
         return;
       }
+      pendingReveals.push(node);
       revealObserver.observe(node);
     });
   }
 
+  // Red de seguridad: un scroll muy rápido o un salto por ancla puede dejar
+  // elementos sin revelar, porque el observador no alcanza a verlos pasar.
+  function sweepReveals() {
+    if (!pendingReveals.length) return;
+    // El 0.85 deja que el observador siga siendo quien dispara primero
+    // en un scroll normal; esto solo atrapa lo que se le escapó.
+    var limit = window.innerHeight * 0.85;
+    pendingReveals.slice().forEach(function (node) {
+      var box = node.getBoundingClientRect();
+      if (box.top < limit && box.bottom > 0) {
+        showNode(node);
+        revealObserver.unobserve(node);
+      }
+    });
+  }
+
   function startTypewriter() {
-    var el2 = $("typewriter");
+    var target = $("typewriter");
     var words = pick(cfg.profile.roles);
     clearTimeout(typeTimer);
 
     if (reduceMotion) {
-      el2.textContent = words[0];
+      target.textContent = words[0];
       return;
     }
 
@@ -353,7 +504,7 @@
       var word = words[wordIndex];
       if (!deleting) {
         charCount++;
-        el2.textContent = word.slice(0, charCount);
+        target.textContent = word.slice(0, charCount);
         if (charCount === word.length) {
           deleting = true;
           typeTimer = setTimeout(tick, 1600);
@@ -362,7 +513,7 @@
         typeTimer = setTimeout(tick, 90);
       } else {
         charCount--;
-        el2.textContent = word.slice(0, charCount);
+        target.textContent = word.slice(0, charCount);
         if (charCount === 0) {
           deleting = false;
           wordIndex = (wordIndex + 1) % words.length;
@@ -375,33 +526,7 @@
     tick();
   }
 
-  // ---------- Story day: línea de tiempo activa y reloj ----------
-
-  function watchStory() {
-    if (storyObserver) storyObserver.disconnect();
-
-    var items = document.querySelectorAll(".story-item");
-    var total = items.length;
-    $("dayProgress").style.width = "0%";
-    $("storyNow").textContent = total ? pick(cfg.storyDay[0].title) : "";
-
-    storyObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        items.forEach(function (node) { node.classList.remove("is-active"); });
-
-        var node = entry.target;
-        var idx = Number(node.dataset.index);
-        node.classList.add("is-active");
-
-        var ratio = total > 1 ? idx / (total - 1) : 1;
-        $("dayProgress").style.width = (ratio * 100) + "%";
-        $("storyNow").textContent = pick(cfg.storyDay[idx].title);
-      });
-    }, { rootMargin: "-45% 0px -45% 0px" });
-
-    items.forEach(function (node) { storyObserver.observe(node); });
-  }
+  // ---------- Reloj ----------
 
   function formatTime(date) {
     return new Intl.DateTimeFormat(lang === "en" ? "en-US" : "es-GT", {
@@ -416,12 +541,20 @@
     var now = new Date();
     $("nowTime").textContent = formatTime(now);
     $("footerTime").textContent = formatTime(now);
+    markRoutineProgress();
   }
 
   // ---------- Scroll, cursor y menú ----------
 
   function onScroll() {
     $("siteHeader").classList.toggle("is-scrolled", window.scrollY > 10);
+
+    // Acelerador por tiempo (no requestAnimationFrame: se detiene si la
+    // pestaña está en segundo plano y dejaría elementos sin revelar).
+    var now = Date.now();
+    if (now - lastSweep < 120) return;
+    lastSweep = now;
+    sweepReveals();
   }
 
   function bindCursorGlow() {
@@ -435,15 +568,31 @@
   function bindMenu() {
     var toggle = $("menuToggle");
     var nav = $("nav");
-    toggle.addEventListener("click", function () {
+
+    function close() {
+      nav.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+    }
+
+    toggle.addEventListener("click", function (e) {
+      e.stopPropagation();
       var open = nav.classList.toggle("open");
       toggle.setAttribute("aria-expanded", String(open));
     });
+
     nav.addEventListener("click", function (e) {
-      if (e.target.tagName === "A") {
-        nav.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
-      }
+      if (e.target.tagName === "A") close();
+    });
+
+    // Cerrar el menú al tocar fuera o con Escape (importante en celular).
+    document.addEventListener("click", function (e) {
+      if (!nav.classList.contains("open")) return;
+      if (nav.contains(e.target) || toggle.contains(e.target)) return;
+      close();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") close();
     });
   }
 
@@ -464,116 +613,6 @@
     });
   }
 
-  // ---------- Terminal interactiva ----------
-
-  var termOut = $("termOutput");
-  var termInput = $("termInput");
-
-  function termPrint(text, cls) {
-    var line = el("div", "term-line" + (cls ? " " + cls : ""), text);
-    termOut.appendChild(line);
-    termOut.scrollTop = termOut.scrollHeight;
-  }
-
-  function termCat(arg) {
-    if (!arg) {
-      termPrint(t("term.catUsage"));
-      return;
-    }
-    if (arg === "stack.txt") {
-      termPrint(allTech().join("\n"));
-      return;
-    }
-    var project = cfg.projects.filter(function (p) { return p.slug === arg; })[0];
-    if (!project) {
-      termPrint(t("term.notFound") + " " + arg);
-      return;
-    }
-    termPrint(
-      project.title + "\n" +
-      pick(project.description) + "\n" +
-      t("term.stack") + ": " + project.stack.join(", ")
-    );
-  }
-
-  function termRun(raw) {
-    var input = raw.trim();
-    termPrint("$ " + raw, "term-cmd");
-    if (!input) return;
-
-    termHistory.push(input);
-    termIndex = termHistory.length;
-
-    var parts = input.split(/\s+/);
-    var cmd = parts[0].toLowerCase();
-    var arg = parts.slice(1).join(" ");
-
-    switch (cmd) {
-      case "help":
-        termPrint(t("term.help"));
-        break;
-      case "whoami":
-        termPrint(cfg.profile.name + " — " + pick(cfg.profile.role));
-        break;
-      case "ls":
-        termPrint(cfg.projects.map(function (p) { return p.slug; }).concat(["stack.txt"]).join("  "));
-        break;
-      case "cat":
-        termCat(arg);
-        break;
-      case "contact":
-        termPrint(cfg.profile.email + "\n" + cfg.profile.github);
-        break;
-      case "date":
-        termPrint(formatTime(new Date()));
-        break;
-      case "theme":
-        toggleTheme();
-        termPrint(t("term.theme"));
-        break;
-      case "lang":
-        setLang(lang === "es" ? "en" : "es");
-        termPrint(t("term.lang"));
-        break;
-      case "clear":
-        termOut.innerHTML = "";
-        break;
-      case "sudo":
-        termPrint(t("term.sudo"));
-        break;
-      default:
-        termPrint(t("term.unknown") + " " + cmd);
-    }
-  }
-
-  function bindTerminal() {
-    $("termForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      var value = termInput.value;
-      termInput.value = "";
-      termRun(value);
-    });
-
-    termInput.addEventListener("keydown", function (e) {
-      if (e.key === "ArrowUp") {
-        if (termIndex > 0) {
-          termIndex--;
-          termInput.value = termHistory[termIndex];
-        }
-        e.preventDefault();
-      } else if (e.key === "ArrowDown") {
-        if (termIndex < termHistory.length - 1) {
-          termIndex++;
-          termInput.value = termHistory[termIndex];
-        } else {
-          termIndex = termHistory.length;
-          termInput.value = "";
-        }
-        e.preventDefault();
-      }
-    });
-  }
-
   // ---------- Arranque ----------
 
   function init() {
@@ -590,10 +629,7 @@
 
     bindMenu();
     bindCopyEmail();
-    bindTerminal();
     bindCursorGlow();
-
-    termPrint(t("term.intro"), "term-muted");
 
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
