@@ -102,20 +102,20 @@ window.PORTFOLIO_CONFIG = {
       repo: "https://github.com/JeshuaPerez/conciertos-conectados"
     },
     {
-      slug: "gestion-inmuebles",
-      title: "Gestión de inmuebles",
-      kind: { es: "CRUD completo", en: "Full CRUD" },
+      slug: "stream-music-app",
+      title: "MusicStream",
+      kind: { es: "Frontend · 7 pantallas", en: "Frontend · 7 screens" },
       cover: "",
       description: {
-        es: "Gestor de propiedades inmobiliarias: listado con búsqueda en tiempo real y paginación, alta y edición con validación, y borrado con confirmación.",
-        en: "Real estate manager: listing with live search and pagination, create and edit with validation, and delete with confirmation."
+        es: "Interfaz completa de una plataforma de streaming y venta de música: portada, detalle de álbum, reproductor, carrito, pago y perfil. Siete pantallas maquetadas a mano, sin frameworks.",
+        en: "Full interface for a music streaming and store platform: home, album detail, player, cart, checkout and profile. Seven screens hand-coded, with no frameworks."
       },
       highlight: {
-        es: "CRUD completo cuidando los casos borde: búsqueda sin resultados y páginas que dejan de existir al borrar registros.",
-        en: "A full CRUD that handles the edge cases: empty search results and pages that stop existing when records are deleted."
+        es: "HTML5 semántico de principio a fin y CSS separado en bases, estructura y componentes reutilizables.",
+        en: "Semantic HTML5 throughout and CSS split into base, layout and reusable components."
       },
-      stack: ["JavaScript", "HTML", "CSS"],
-      repo: "https://github.com/JeshuaPerez/gestion-inmuebles"
+      stack: ["HTML5", "CSS3", "Diseño responsive"],
+      repo: "https://github.com/JeshuaPerez/stream-music-app"
     },
     {
       slug: "downhill-bikes",
